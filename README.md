@@ -7,6 +7,7 @@ When you decide to migrate a new table, it can be found in the database/migratio
 Lastly, for the main control point of the app which is the web.php, it can be found in the routes folder.
 
 Import the crud sql text file(found in the folder that you will be cloning)
+
     --Process in Creating the Current App--
     1. Create a preparation of several blade.php files in which each file is another page 
     2. Within those files, when you create a button you have to enclose them in a form function from HTML by which then you 
