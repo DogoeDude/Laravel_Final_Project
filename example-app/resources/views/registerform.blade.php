@@ -10,7 +10,7 @@
 <body class="bg-gray-100 p-4 h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-3xl font-bold mb-6 text-center">Register</h1>
-        <form action="/register_user" method="POST" class="space-y-4"> <!-- Corrected action attribute -->
+        <form action="/register_user" method="POST" class="space-y-4" id="registerForm">
             @csrf
             <!-- First Name -->
             <div>
@@ -38,5 +38,27 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            var form = event.target;
+            var inputs = form.querySelectorAll('input[required]');
+            var isEmpty = false;
+
+            inputs.forEach(function(input) {
+                if (!input.value) {
+                    isEmpty = true;
+                    input.classList.add('border-red-500'); // Add red border to empty fields
+                } else {
+                    input.classList.remove('border-red-500'); // Remove red border if field is filled
+                }
+            });
+
+            if (isEmpty) {
+                event.preventDefault(); // Prevent form submission
+                alert('Please fill in all required fields.'); // Show alert for empty fields
+            }
+        });
+    </script>
 </body>
 </html>

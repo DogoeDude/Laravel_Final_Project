@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Models\RegisteredUsers;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,6 +10,7 @@ class register_user extends Controller
 {
     public function registerUser(Request $request)
     {
+        // Validate the incoming request data
         $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname' => 'required',
@@ -18,16 +18,16 @@ class register_user extends Controller
             'password' => 'required|min:8',
         ]);
 
+        // Check if validation fails
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        //We then create here an object to be stored in the database
-        $user = new RegisteredUsers();
-        $user->firstname = $request->input('firstname');
-        $user->lastname = $request->input('lastname');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password')); //we hash the password so that its characters are unidentifiable
-        $user->save();
-        return view('dashboard');
+
+        // Validation passed, proceed with creating the user
+        $incomingFields = $validator->validated();
+        $incomingFields['password'] = bcrypt($incomingFields['password']);
+        $newUser = RegisteredUsers::create($incomingFields);
+
+        return redirect('/');
     }
 }
