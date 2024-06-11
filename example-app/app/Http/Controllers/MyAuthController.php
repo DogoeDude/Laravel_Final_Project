@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\RegisteredUsers;
 use Illuminate\Support\Facades\Validator;
-
-class register_user extends Controller
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+class MyAuthController extends Controller
 {
     public function registerUser(Request $request)
     {
@@ -14,7 +14,7 @@ class register_user extends Controller
         $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:registeredusers',
+            'email' => 'required|email|unique:registered_users',
             'password' => 'required|min:8',
         ]);
 
@@ -29,5 +29,27 @@ class register_user extends Controller
         $newUser = RegisteredUsers::create($incomingFields);
 
         return redirect('/');
+    }
+
+    public function checkCredentials(Request $request)
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        // Find the user by email
+        $user = RegisteredUsers::where('email', $email)->first();
+
+        // Check if user exists and if the password matches
+        if ($user && Hash::check($password, $user->password)) {
+            return redirect()->route('dashboard');
+        }
+        return redirect()->route('LRpage');
+    }
+
+    public function loggingout(){
+        return view('LRpage');
+    }
+    public function profile(){
+        return 'Profile page.';
     }
 }

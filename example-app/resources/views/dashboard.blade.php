@@ -14,11 +14,12 @@
             <h1 class="text-2xl font-bold mb-8">Dashboard</h1>
             <nav>
                 <ul class="space-y-4">
-                    <li><a href="#" class="block py-2 px-4 rounded hover:bg-blue-700">Home</a></li>
-                    <li><a href="#" class="block py-2 px-4 rounded hover:bg-blue-700">Profile</a></li>
-                    <li><a href="#" class="block py-2 px-4 rounded hover:bg-blue-700">Settings</a></li>
-                    <li><a href="#" class="block py-2 px-4 rounded hover:bg-blue-700">Messages</a></li>
-                    <li><a href="#" class="block py-2 px-4 rounded hover:bg-blue-700">Logout</a></li>
+                    <form action="/profile">
+                        <button class="block py-2 px-4 rounded hover:bg-blue-700" name = "profile">Profile</button>
+                    </form>
+                    <form action="/logout">
+                        <button class="block py-2 px-4 rounded hover:bg-red-700" name = "logout" method = "GET">Logout</button>
+                    </form>
                 </ul>
             </nav>
         </aside>
