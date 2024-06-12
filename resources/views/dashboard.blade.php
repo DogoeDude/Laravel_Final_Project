@@ -11,12 +11,9 @@
     <div class="flex h-full">
         <!-- Sidebar -->
         <aside class="w-64 bg-blue-800 text-white p-6">
-            <h1 class="text-2xl font-bold mb-8">Dashboard</h1>
+            <h1 class="text-2xl font-bold mb-8">To do list</h1>
             <nav>
                 <ul class="space-y-4">
-                    <form action="/profile">
-                        <button class="block py-2 px-4 rounded hover:bg-blue-700" name = "profile">Profile</button>
-                    </form>
                     <form action="/logout">
                         <button class="block py-2 px-4 rounded hover:bg-red-700" name = "logout" method = "GET">Logout</button>
                     </form>
@@ -28,7 +25,17 @@
         <div class="flex-1 p-6">
             <!-- Header -->
             <header class="flex justify-between items-center bg-white p-6 rounded-lg shadow">
-                <h2 class="text-xl font-semibold">Dashboard</h2>
+
+                <!-- Add a task -->
+                <form action = "{{ route('task.create') }}"method="post">
+                    @csrf
+                    <div class="flex items-center space-x-4">
+                        <input type="text" name = 'task' placeholder="Today I will..." class="px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-500">
+                        <input type ="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700" value="Add Task"></input>
+                    </div>
+                </form>
+
+
                 <div class="flex items-center space-x-4">
                     <input type="text" placeholder="Search..." class="px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-500">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Search</button>
@@ -38,28 +45,21 @@
             <!-- Widgets -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                 <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold mb-4">Widget 1</h3>
-                    <p>Content goes here...</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold mb-4">Widget 2</h3>
-                    <p>Content goes here...</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold mb-4">Widget 3</h3>
-                    <p>Content goes here...</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold mb-4">Widget 4</h3>
-                    <p>Content goes here...</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold mb-4">Widget 5</h3>
-                    <p>Content goes here...</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold mb-4">Widget 6</h3>
-                    <p>Content goes here...</p>
+                    <h3 class="text-lg font-semibold mb-4">Pending Tasks</h3>
+                    <!-- Iterate over tasks -->
+                    @foreach($tasks as $task)
+                    <div class="border-b py-2">
+                        <p class="text-gray-800">{{ $task->content }}</p>
+                        <p class="text-gray-500">{{ $task->finished == 0 ? 'Not yet finished' : 'Finished' }}</p>
+                        <p class="text-gray-500">Created Date: {{ $task->created_at->format('m-d-Y') }}</p>
+                        <!-- You can add more details like 'created_at', 'updated_at', etc. here if needed -->
+                    </div>
+                    @endforeach
+                    
+                    <!-- If there are no tasks -->
+                    @if($tasks->isEmpty())
+                    <p>Congrats! You have no pending tasks</p>
+                    @endif
                 </div>
             </div>
         </div>
