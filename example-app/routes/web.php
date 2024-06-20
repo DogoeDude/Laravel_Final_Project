@@ -10,13 +10,18 @@ Route::get('/', function () {
     return view('LRpage');
 })->name('LRpage');
 
-route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-route::get('/view_form', [register_form::class, 'viewform'])->name('view_form');
-route::post('/register_user', [MyAuthController::class, 'registerUser']);
+Route::get('/dashboard', [TaskController::class, 'dashboard'])->name('dashboard');
+Route::get('/view_form', [register_form::class, 'viewform'])->name('view_form');
+Route::post('/register_user', [MyAuthController::class, 'registerUser']);
 Route::post('/login', [MyAuthController::class, 'checkCredentials'])->name('login');
-route::get('/logout', [MyAuthController::class, 'loggingout']);
-route::get('profile', [MyAuthController::class, 'profile']);
+Route::get('/logout', [MyAuthController::class, 'loggingout']);
+Route::get('profile', [MyAuthController::class, 'profile']);
 
-route::post('/task', [TaskController::class, 'create'])->name('task.create');
-route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
+Route::post('/task', [TaskController::class, 'create'])->name('task.create');
+Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
+Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('task.edit');
+Route::put('/task/{id}', [TaskController::class, 'update'])->name('task.update');
+Route::put('/task/{id}/mark-finished', [TaskController::class, 'markFinished'])->name('task.markFinished');
+
+
+

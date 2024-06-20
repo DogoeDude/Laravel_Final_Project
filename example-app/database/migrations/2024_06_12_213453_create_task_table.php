@@ -18,9 +18,9 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('content');
-            $table->boolean('finished')->default(false);
             $table->text('description')->nullable();
-            $table->string('img')->nullable()->after('description');
+            $table->date('due_date')->nullable();
+            $table->boolean('finished')->default(false);
             $table->timestamps();
         });
     }

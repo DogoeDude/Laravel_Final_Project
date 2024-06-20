@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2024 at 03:59 AM
+-- Generation Time: Jun 20, 2024 at 03:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -116,7 +116,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1),
-(5, '2024_06_11_014109_create_registeredusers_table', 2);
+(18, '2024_06_11_014109_create_registeredusers_table', 2),
+(19, '2024_06_12_213453_create_task_table', 2);
 
 -- --------------------------------------------------------
 
@@ -151,8 +152,7 @@ CREATE TABLE `registeredusers` (
 --
 
 INSERT INTO `registeredusers` (`id`, `firstname`, `lastname`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Reggie', 'Hermosisima', 'reggiehermosisima@gmail.com', '$2y$12$pNHrwr9Au9gMZQ0sIvJebeSQh3xFDsXWiLntp14/.agUhpXbcisLW', '2024-06-10 17:53:54', '2024-06-10 17:53:54'),
-(3, 'Joxyle', 'Omer', 'Jomer123@gmail.com', '$2y$12$n6Ga.v71cOAMNaX7opOicODRtpP3t87bnidTwSVfp.Z.kXSoYB.p2', '2024-06-10 17:57:38', '2024-06-10 17:57:38');
+(1, 'Reggie', 'Hermosisima', 'reggiehermosisima@gmail.com', '$2y$12$Unyo.joVxpyy1jEn5pM9gOSU.A4lE6Yp32LdEmMW1BUse2oZ6as7.', '2024-06-20 05:18:19', '2024-06-20 05:18:19');
 
 -- --------------------------------------------------------
 
@@ -174,8 +174,32 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('8Ri1dQ7TxKlIpAFTzbmWQsLzaDFIYbwpx0iyurkm', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVk9zM0FYMDdVelJKUjJRdXE1eVpLcFMxMjJaek5LTXk4clBrSFYySyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6OTA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC92aWV3X2Zvcm0/X3Rva2VuPVZPczNBWDA3VXpSSlIyUXVxNXlaS3BTMTIyWnpOS015OHJQa0hWMksmdmlld19mb3JtPSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1718071058),
-('tqPsWATcZZ1IrZMKMptsAMyon759TiMhbDKPIVJa', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibm56bGVHV2Q2RExUUERJVVBGaURuUEczOE5LNzE2amp3cElKVXdyZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1718067044);
+('KjmDb4W0RXFWk2O1cfLgzdTBPtBiB7c3YWZeb0lm', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWnd6ZGxLVnRPQWdXTzU3VFNCelg3cFNWV013M1F6SUtzU1YzRk1pYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1718889648);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `finished` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `content`, `description`, `due_date`, `finished`, `created_at`, `updated_at`) VALUES
+(2, 'Don\'t! Be racist', 'Stop it! Get some help and Stop Being Racist Man!, what is wrong with you, people are starving and you\'re out here being racist! com\'n dude', '2024-06-30', 1, '2024-06-20 05:20:04', '2024-06-20 05:20:20'),
+(3, 'Justin Bieber', 'Justin Bieber (born March 1, 1994) is a pop, R&B musician and recording artist, singer-songwriter and part-time actor. Since bursting onto the scene in 2008 (after being discovered on YouTube) he has taken the world by storm and divided opinion; selling 15 million albums worldwide, making two concert documentaries, winning numerous awards, amassing 100 million Twitter followers, and being the most Googled person on Earth more than once.', '2024-07-06', 0, '2024-06-20 05:20:29', '2024-06-20 05:20:29'),
+(4, 'Test on Overdue task', 'Heck no to overdue', '2024-06-03', 0, '2024-06-20 05:20:48', '2024-06-20 05:20:48');
 
 -- --------------------------------------------------------
 
@@ -258,6 +282,12 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -284,13 +314,19 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `registeredusers`
 --
 ALTER TABLE `registeredusers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
