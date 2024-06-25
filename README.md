@@ -34,3 +34,11 @@ Import the crud sql text file(found in the folder that you will be cloning)
             : in the models, declare an object from the table
 
     NOTE: Make different files from one another to prevent possible disruptions of other people's progress. Make sure to use XAMPP. 
+
+![Screenshot 2024-06-25 194428](https://github.com/DogoeDude/Laravel_Final_Project/assets/111434642/bbd1df02-e0fb-48a1-97e3-8a7804ecb1f5)
+![Screenshot 2024-06-25 194215](https://github.com/DogoeDude/Laravel_Final_Project/assets/111434642/8d750269-927b-41d2-829a-52b6c769262e)
+![Screenshot 2024-06-25 194317](https://github.com/DogoeDude/Laravel_Final_Project/assets/111434642/3e925c4e-6852-4c84-bbd1-06376b26463a)
+![Screenshot 2024-06-25 194330](https://github.com/DogoeDude/Laravel_Final_Project/assets/111434642/789fead5-b239-4e1d-80d6-00ae6a6e347b)
+![Screenshot 2024-06-25 194339](https://github.com/DogoeDude/Laravel_Final_Project/assets/111434642/c91dbe07-e880-451e-b16b-43bb2ff288ab)
+![Screenshot 2024-06-25 194408](https://github.com/DogoeDude/Laravel_Final_Project/assets/111434642/f96dbf5b-097d-47c2-a9ec-54e1fe8981b8)
+![Screenshot 2024-06-25 194417](https://github.com/DogoeDude/Laravel_Final_Project/assets/111434642/ecf0afd2-dd70-4d08-a936-3ae506de45d7)
